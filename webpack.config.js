@@ -25,6 +25,20 @@ module.exports = {
 				include: path.resolve(__dirname, 'src'),
 				use: ['style-loader', 'css-loader', 'postcss-loader'],
 			},
+			{
+				type: "asset",
+				test: /\.(png|svg|jpg|gif)$/i,
+				use:[
+					{
+						loader:'file-loader',
+						options:{
+							name: '[name].[ext]',
+							outputPath:'img/',
+							useRelativePath:true,
+						}
+					}
+				]
+			}
 		],
 	},
 	plugins:[

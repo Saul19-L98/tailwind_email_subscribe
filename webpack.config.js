@@ -1,4 +1,5 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
+const copyPlugin = require('copy-webpack-plugin');
 const path = require('path');
 
 module.exports = {
@@ -7,11 +8,10 @@ module.exports = {
 	output: {
 		path: path.resolve(__dirname,'dist'),
 		filename:'bundle.js',
+		clean: true,
 	},
 	devServer: {
-		static: {
-			directory: path.resolve(__dirname, 'dist'),
-		},
+		watchFiles: ["src/**/*"],
 		port: 3000,
 		open: true,
 		hot: true,
@@ -42,11 +42,8 @@ module.exports = {
 		],
 	},
 	plugins:[
-		new HtmlWebpackPlugin({
-			template: './src/index.html',
-			filename: 'index.html',
-			inject: 'head',
-			scriptLoading: 'defer'
+		new CopyPlugin({
+			patterns:[{from: "src/index.html", to: "index.html"}],
 		})
 	]
 }
